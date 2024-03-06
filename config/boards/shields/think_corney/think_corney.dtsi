@@ -94,7 +94,7 @@ nice_view_spi: &spi0 {
 
 
 
-#define Q_BOARD
+// #define Q_BOARD
 #ifdef Q_BOARD
 #define MOUSE_PS2_PIN_SCL_PRO_MICRO <&gpio0 24 GPIO_ACTIVE_HIGH>
 #define MOUSE_PS2_PIN_SDA_PRO_MICRO <&gpio0 13 GPIO_ACTIVE_HIGH>

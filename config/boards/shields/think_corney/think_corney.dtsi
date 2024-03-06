@@ -92,15 +92,18 @@ nice_view_spi: &spi0 {
 // #define MOUSE_PS2_PIN_SCL_PRO_MICRO <&pro_micro 1 GPIO_ACTIVE_HIGH>
 // #define MOUSE_PS2_PIN_SDA_PRO_MICRO <&pro_micro 0 GPIO_ACTIVE_HIGH>
 
-// #define MOUSE_PS2_PIN_SCL_PRO_MICRO <&pro_micro 20 GPIO_ACTIVE_HIGH>
-// #define MOUSE_PS2_PIN_SDA_PRO_MICRO <&pro_micro 18 GPIO_ACTIVE_HIGH>
-// #define MOUSE_PS2_PIN_SCL_PRO_MICRO <&gpio0 29 GPIO_ACTIVE_HIGH>
-// #define MOUSE_PS2_PIN_SDA_PRO_MICRO <&gpio1 15 GPIO_ACTIVE_HIGH>
 
 
+#define Q_BOARD
+#ifdef Q_BOARD
 #define MOUSE_PS2_PIN_SCL_PRO_MICRO <&gpio0 24 GPIO_ACTIVE_HIGH>
 #define MOUSE_PS2_PIN_SDA_PRO_MICRO <&gpio0 13 GPIO_ACTIVE_HIGH>
-
+#else
+#define MOUSE_PS2_PIN_SCL_PRO_MICRO <&pro_micro 20 GPIO_ACTIVE_HIGH>
+#define MOUSE_PS2_PIN_SDA_PRO_MICRO <&pro_micro 18 GPIO_ACTIVE_HIGH>
+// #define MOUSE_PS2_PIN_SCL_PRO_MICRO <&gpio0 29 GPIO_ACTIVE_HIGH>
+// #define MOUSE_PS2_PIN_SDA_PRO_MICRO <&gpio1 15 GPIO_ACTIVE_HIGH>
+#endif
 
 // Uncomment and configure this pin if you have an extra free pin and want the
 // controller to perform the Power-On-Reset sequence, which many trackpoints
@@ -125,9 +128,11 @@ nice_view_spi: &spi0 {
 // We don't define the SCL pin, because UART uses a baud rate instead of
 // a clock pin.
 // #define MOUSE_PS2_PIN_SDA_PINCTRL <NRF_PSEL(UART_RX, 0, 8)>
-// #define MOUSE_PS2_PIN_SDA_PINCTRL <NRF_PSEL(UART_RX, 1, 15)>
+#ifdef Q_BOARD
 #define MOUSE_PS2_PIN_SDA_PINCTRL <NRF_PSEL(UART_RX, 0, 13)>
-
+#else
+#define MOUSE_PS2_PIN_SDA_PINCTRL <NRF_PSEL(UART_RX, 1, 15)>
+#endif
 
 // In UART two different pins are used for receiving and transmitting, but PS/2
 // uses the same pin for both.
